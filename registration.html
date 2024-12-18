@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/form_style.css">
+    <title>Регистрация</title>
+</head>
+<body>
+    <div id="registration_form" >
+        <h1>Регистрация</h1>
+        <form class="form" action="" method="post">
+            <input class="input" type="text" id="nik" placeholder="Ваш Ник (никнейм — псевдоним)">
+            <input class="input" type="email" id="email" placeholder="Ваш e-mail">
+            <input class="input" type="password" id="password1" placeholder="Пароль">
+            <input class="input" type="password" id="password2" placeholder="Пароль еще раз">
+            <button class="btn" onclick="registrate()" type="submit">Регистрация</button>
+        </form>
+    </div>
+    <script src="js/reg.js"></script>
+</body>
+</html>
