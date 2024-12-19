@@ -10,16 +10,37 @@
     <title>Регистрация</title>
 </head>
 <body>
-    <div id="registration_form" >
+    <div class="image-container">
+        <img src="img/books.png" alt="Описание изображения 1" class="image">
+    </div>
+
+    <div id="registration_form" class="invisible">
         <h1>Регистрация</h1>
         <form class="form" action="" method="post">
             <input class="input" type="text" id="nik" placeholder="Ваш Ник (никнейм — псевдоним)">
             <input class="input" type="email" id="email" placeholder="Ваш e-mail">
             <input class="input" type="password" id="password1" placeholder="Пароль">
             <input class="input" type="password" id="password2" placeholder="Пароль еще раз">
-            <button class="btn" onclick="registrate()" type="submit">Регистрация</button>
+            <button class="btn" onclick="signUp()" type="submit">Регистрация</button>
+            <button class="link-btn" onclick="authorization()" type="submit">Уже есть аккаунт</button>
         </form>
     </div>
+
+    <div id="authorization_form"  >
+        <h1>Авторизация</h1>
+        <form class="form" action="" method="post">
+            <input class="input" type="email" id="email-a" placeholder="Ваш e-mail">
+            <input class="input" type="password" id="password-a" placeholder="Пароль">
+            <button class="btn" onclick="login()" type="submit">Войти</button>
+            <button class="link-btn" onclick="registrate()" type="submit">Нет аккаунта</button>
+        </form>
+    </div>
+    
+
+    <div class="invisible" class="book-container"  id="book-container">
+        <!-- Книги будут добавлены здесь -->
+    </div>
+
     <script src="js/reg.js"></script>
 </body>
 </html>

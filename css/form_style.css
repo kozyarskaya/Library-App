@@ -30,6 +30,25 @@ h1 {
     color: var(--text_color);
     text-align: center;
 }
+.image-container{
+    .image-container {
+        display: flex; /* Использование Flexbox */
+        justify-content: center; /* Выравнивание по центру */
+        align-items: center; /* Выравнивание по вертикали */
+    }
+
+    .image {
+        margin-top: 2px; 
+        width: 100%; /* Ширина изображения */
+        height: auto; /* Высота изображения */
+        object-fit: cover; /* Масштабирование изображения */
+        transition: transform 0.3s ease-in-out; /* Анимация при наведении */
+    }
+
+    .image:hover {
+        transform: scale(1.1); /* Масштабирование при наведении */
+    }
+}
 
 .form {
     align-content: center;
@@ -70,6 +89,67 @@ h1 {
 
 }
 
+.link-btn{
+    display: block;
+    width: auto;
+    padding: 5px 5px;
+    
+    border: 0;
+    /*border-top-right-radius: var(--border_radius);
+    border-bottom-left-radius: var(--border_radius);*/
+    background-color: var(--bg_color);
+    cursor: pointer;
+    
+    font-family: inherit;
+    font-size: 12px;
+    color: var(--color2);
+    text-decoration: underline;
+
+}
+
 .btn:hover {
     background-color: var(--color1);
 }
+
+.link-btn:hover{
+    color: var(--color3);
+}
+
+/* C A R D S */
+
+.book-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.book-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-item h2 {
+    margin-top: 0;
+}
+
+.book-item p {
+    margin-bottom: 10px;
+}
+
+.book-item a {
+    text-decoration: none;
+    color: #337ab7;
+}
+
+.book-item a:hover {
+    color: #23527c;
+   /* flex: 1 1 300px; /* Адаптивная ширина */
+    margin: 20px;
+}
+
