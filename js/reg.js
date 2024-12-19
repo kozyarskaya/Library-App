@@ -28,7 +28,7 @@ const inputPassA = document.getElementById("password-a");
         } else if (!inputEmail.value.trim().includes('@')) {
             alert('Адрес электронной почты должен содержать @');
         } else {
-            signUP(); // Вызов функции отправки данных на сервер
+            signUp(); // Вызов функции отправки данных на сервер
         }
     });
 
@@ -57,7 +57,7 @@ const inputPassA = document.getElementById("password-a");
     }
 
     // Функция отправки данных на сервер
-    function signUP() {
+    function signUp() {
         const input_data = { 
             username: inputUserName.value.trim(), // Получение значения ника
             email: inputEmail.value.trim(), // Получение значения электронной почты
