@@ -65,7 +65,7 @@ const inputPassA = document.getElementById("password-a");
         };
 
         // Отправка POST запроса на сервер
-        fetch('http://127.0.0.1:5501/api', {
+        fetch('http://127.0.0.1:5501/api/registration', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }, // Установка заголовка Content-Type
             body: JSON.stringify(input_data) // Преобразование данных в JSON строку
