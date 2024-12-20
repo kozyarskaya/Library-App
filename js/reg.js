@@ -66,12 +66,14 @@ const authBtn = document.getElementById("auth-btn")
         };
 
         // Отправка POST запроса на сервер
+    
         fetch('http://127.0.0.1:5501/api/registration', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }, // Установка заголовка Content-Type
             body: JSON.stringify(input_data) // Преобразование данных в JSON строку
         })
         .then(response => {
+            
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`); // Обработка ошибок HTTP
             }
@@ -80,10 +82,13 @@ const authBtn = document.getElementById("auth-btn")
         .then(data => {
             console.log(data); // Вывод полученных данных в консоль
             if (data.ok) { // Проверка статуса ответа
+                
                 registrationForm.classList.add("invisible"); // Скрытие формы регистрации
                 bookContainerG.classList.remove("invisible"); // Отображение контейнера для книг
 
                 alert(`Аккаунт создан)\n Ваш ник и почта: ${inputUserName.value} ${inputEmail.value}`); // Вывод сообщения об успешной регистрации
+            }else{
+                alert(data.Massage)
             }
         })
         .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
@@ -117,6 +122,8 @@ const authBtn = document.getElementById("auth-btn")
                 bookContainerG.classList.remove("invisible"); // Отображение контейнера для книг
 
                 alert(`С возвращением!\n  ${inputEmailA.value}`); // Вывод сообщения об успешной авторизации
+            }else{
+                alert(data.Massage)
             }
         })
         .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
