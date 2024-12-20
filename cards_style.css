@@ -30,6 +30,12 @@ h1 {
     color: var(--text_color);
     text-align: center;
 }
+.beautiful{
+    font-family: inherit;
+    font-size: 65px;
+    color:#572207
+
+}
 
 .image-container {
         display: inline-block;
@@ -76,6 +82,7 @@ h1 {
     display: block;
     width: 100%;
     padding: 8px 10px;
+    margin: 3px;
     
     border: 0;
     border-top-right-radius: var(--border_radius);
@@ -88,6 +95,7 @@ h1 {
     color: var(--bg_color);
 
 }
+
 
 .link-btn{
     display: block;
@@ -118,38 +126,78 @@ h1 {
 /* C A R D S */
 
 .book-container {
-    max-width: 800px;
+    max-width: auto;
     margin: auto;
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
 }
 
 .book-item {
-    margin-bottom: 20px;
+    background-color: #2b2a2c;
+    background-image: url("img/open_book.png");
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
+    min-width: 500px;
+    margin: 20px;
     padding: 20px;
-    border: 1px solid #ddd;
+    padding-right: 40px;
+    /*border: 1px solid #ddd;*/
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 5px -5px #a35f3a;
+    
 }
 
 .book-item h2 {
     margin-top: 0;
+    font-family: inherit;
+    width: 45%;
+    padding-left: 30px;
+    
+    
 }
 
 .book-item p {
     margin-bottom: 10px;
+    width: 45%;
+    padding-left: 30px;
+
 }
 
-.book-item a {
+.btnleft{
+    display: block;
+    max-width: 50%;
+    padding: 8px 10px;
+    margin: 3px;
+    margin-left: 55%;
+    
+    border: 0;
+    border-top-right-radius: var(--border_radius);
+    border-bottom-left-radius: var(--border_radius);
+    background-color: var(--color2);
+    cursor: pointer;
+    
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--bg_color);
+
+} 
+.btnleft:hover {
+    background-color: var(--color1);
+}
+
+
+/*.book-item a {
     text-decoration: none;
     color: #337ab7;
 }
 
 .book-item a:hover {
     color: #23527c;
-   /* flex: 1 1 300px; /* Адаптивная ширина */
+   /* flex: 1 1 300px; /* Адаптивная ширина 
     margin: 20px;
-}
+}*/
 
