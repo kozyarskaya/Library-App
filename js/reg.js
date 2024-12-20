@@ -14,6 +14,7 @@ const authorizationForm = document.getElementById("authorization_form"); // По
 const bookContainerG = document.getElementById("book-containerG"); // Получение контейнера для книг
 const inputEmailA = document.getElementById("email-a");
 const inputPassA = document.getElementById("password-a");
+const authBtn = document.getElementById("auth-btn")
 
 
     // Обработка события отправки формы регистрации
@@ -31,7 +32,7 @@ const inputPassA = document.getElementById("password-a");
             signUp(); // Вызов функции отправки данных на сервер
         }
     });
-
+    
     // Обработка события отправки формы авторизации
     authorizationForm.addEventListener('submit', function(event) {
         event.preventDefault(); // Предотвратить стандартное поведение отправки формы
@@ -80,7 +81,7 @@ const inputPassA = document.getElementById("password-a");
             console.log(data); // Вывод полученных данных в консоль
             if (data.ok) { // Проверка статуса ответа
                 registrationForm.classList.add("invisible"); // Скрытие формы регистрации
-                bookContainer.classList.remove("invisible"); // Отображение контейнера для книг
+                bookContainerG.classList.remove("invisible"); // Отображение контейнера для книг
 
                 alert(`Аккаунт создан)\n Ваш ник и почта: ${inputUserName.value} ${inputEmail.value}`); // Вывод сообщения об успешной регистрации
             }
@@ -120,7 +121,13 @@ const inputPassA = document.getElementById("password-a");
         })
         .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
     }
-    
+
+
+
+// C A R D S
+
+
+
     // Выбор элементов по их ID
 const bookContainer = document.getElementById('book-container');
 const addBookBtn = document.getElementById('add-book-btn');
@@ -129,7 +136,8 @@ const addBookFormContent = document.getElementById('add-book-form-content');
 
 // Загрузка книг с сервера используя fetch API
 if (bookContainer) { 
-fetch('test.json')
+//fetch('test.json')
+fetch('/api/articles')
     .then(response => response.json())
     .then(data => {
         // Перебор массива книг и создание элементов для каждой книги
@@ -159,14 +167,26 @@ fetch('test.json')
 
             // Создание кнопок для редактирования и удаления книги
             const editBtn = document.createElement('button');
-            editBtn.textContent = 'Редактировать';
+            //editBtn.textContent = 'Редактировать';
+            editBtn.title ="Редактировать"
             editBtn.onclick = () => editBook(book._id); // Вызов функции редактирования книги
-            editBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
+            //editBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
+            editBtn.classList.add("edit-btn");
+            const editIcon = document.createElement('i');
+            editIcon.classList.add('fas', 'fa-pencil-alt', 'edit-icon');
+            editBtn.appendChild(editIcon);
+    
+
 
             const deleteBtn = document.createElement('button');
-            deleteBtn.textContent = 'Удалить';
+            //deleteBtn.textContent = 'Удалить';
+            deleteBtn.title="Удалить"
             deleteBtn.onclick = () => deleteBook(book._id); // Вызов функции удаления книги
-            deleteBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
+            //deleteBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
+            deleteBtn.classList.add("delete-btn");
+            const deleteIcon = document.createElement('i');
+            deleteIcon.classList.add('fas', 'fa-trash-alt', 'delete-icon');
+            deleteBtn.appendChild(deleteIcon);
 
             // Добавление элементов в контейнер книги
             bookItem.appendChild(title);
@@ -176,6 +196,7 @@ fetch('test.json')
             //bookItem.appendChild(text);
             bookItem.appendChild(editBtn);
             bookItem.appendChild(deleteBtn);
+            
 
             // Добавление контейнера книги в общий контейнер книг
             bookContainer.appendChild(bookItem);
@@ -185,7 +206,9 @@ fetch('test.json')
 
     // Обработка клика по кнопке добавления новой книги
 addBookBtn.onclick = () => {
-    addBookForm.classList.remove('invisible'); // Показать форму добавления книги
+    //addBookForm.classList.remove('invisible'); // Показать форму добавления книги
+        const htmlHeight = document.documentElement.scrollHeight;
+        window.scrollTo({ top: htmlHeight, behavior: 'smooth' });
 };
 
 // Обработка отправки формы добавления новой книги
@@ -200,7 +223,7 @@ addBookFormContent.addEventListener('submit', (e) => {
     //const text = document.getElementById('text').value; // Комментировано, но можно раскомментировать если нужно
 
     // Отправка POST запроса на сервер для добавления новой книги
-    fetch('http://127.0.0.1:5501/api/books/', {
+    fetch('http://127.0.0.1:5501/api/articles/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, author, date, preview, text: '' }) // Преобразование данных в JSON строку
@@ -289,10 +312,13 @@ function editBook(id) {
             const newPreview = document.getElementById('preview').value;
 
             // Отправка PUT запроса на сервер для обновления книги
-            fetch(`http://127.0.0.1:5501/api/books/${id}`, {
+            fetch(`http://127.0.0.1:5501/api/articles/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title: newTitle, author: newAuthor, date: newDate, preview: newPreview })
+                body: JSON.stringify({ title: newTitle,
+                                        author: newAuthor,
+                                        date: newDate, 
+                                        preview: newPreview })
             })
             .then(response => response.json())
             .then(data => {
@@ -333,12 +359,10 @@ function editBook(id) {
     }
 }
 
-
-
 // Функция удаления книги
 function deleteBook(id) {
     // Отправка DELETE запроса на сервер для удаления книги
-    fetch(`http://localhost:3000/api/books/${id}`, {
+    fetch(`http://localhost:3000/api/articles/${id}`, {
         method: 'DELETE'
     })
     .then(() => {
