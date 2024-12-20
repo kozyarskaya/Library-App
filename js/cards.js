@@ -129,88 +129,87 @@ addBookFormContent.addEventListener('submit', (e) => {
     .catch(error => console.error('Ошибка:', error)); // Обработка ошибок при добавлении книги
 });
     // Функция редактирования книги
+// Редактирование книги
 function editBook(id) {
-    // Найти элемент книги по ID
-    const bookItem = bookContainer.querySelector(`.book-item[data-id="${id}"]`);
-    if (!bookItem) return;
+    try {
+        const bookItem = bookContainer.querySelector(`.book-item[data-id="${id}"]`);
+        if (!bookItem) throw new Error('Элемент не найден');
 
-    // Получить текущие значения полей книги
-    const title = bookItem.querySelector('h2').textContent;
-    const author = bookItem.querySelector('p:nth-child(2)').textContent.replace('Автор: ', '');
-    const date = bookItem.querySelector('p:nth-child(3)').textContent.replace('Дата: ', '');
-    const preview = bookItem.querySelector('p:nth-child(4)').textContent;
-   // const text = bookItem.querySelector('p:nth-child(5)').textContent;
+        const title = bookItem.querySelector('h2').textContent;
+        const author = bookItem.querySelector('p:nth-child(2)').textContent.replace('Автор: ', '');
+        const date = bookItem.querySelector('p:nth-child(3)').textContent.replace('Дата: ', '');
+        const preview = bookItem.querySelector('p:nth-child(4)').textContent;
 
-    // Создать форму для редактирования книги
-    const editForm = document.createElement('form');
-    editForm.innerHTML = `
-        <input class="input" type="text" id="title" value="${title}">
-        <input class="input" type="text" id="author" value="${author}">
-        <input class="input" type="date" id="date" value="${date}">
-        <input class="input" type="text" id="preview" value="${preview}">
-        <button class="btn" type="submit">Сохранить</button>
-    `;
+        // Создание формы для редактирования книги
+        const editForm = document.createElement('form');
+        editForm.innerHTML = `
+            <input class="input" type="text" id="title" value="${title}">
+            <input class="input" type="text" id="author" value="${author}">
+            <input class="input" type="date" id="date" value="${date}">
+            <input class="input" type="text" id="preview" value="${preview}">
+            <button class="btn" type="submit">Сохранить</button>
+        `;
 
-    // Очистить контент элемента книги и добавить форму редактирования
-    bookItem.innerHTML = '';
-    bookItem.appendChild(editForm);
+        // Очистить контент элемента книги и добавить форму редактирования
+        bookItem.innerHTML = '';
+        bookItem.appendChild(editForm);
 
-    // Обработка отправки формы редактирования книги
-    editForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+        // Обработка отправки формы редактирования книги
+        editForm.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        // Получить новые значения полей книги
-        const newTitle = document.getElementById('title').value;
-        const newAuthor = document.getElementById('author').value;
-        const newDate = document.getElementById('date').value;
-        const newPreview = document.getElementById('preview').value;
-       // const newText = document.getElementById('text').value; // Комментировано, но можно раскомментировать если нужно
+            // Получить новые значения полей формы
+            const newTitle = document.getElementById('title').value;
+            const newAuthor = document.getElementById('author').value;
+            const newDate = document.getElementById('date').value;
+            const newPreview = document.getElementById('preview').value;
 
-        // Отправка PUT запроса на сервер для обновления книги
-        fetch(`http://127.0.0.1:5501/api/books/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: newTitle, author: newAuthor, date: newDate, preview: newPreview, text: '' }) // Преобразование данных в JSON строку
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Создать новые элементы для отображения обновленной информации о книге
-            const titleElement = document.createElement('h2');
-            titleElement.textContent = data.title;
+            // Отправка PUT запроса на сервер для обновления книги
+            fetch(`http://127.0.0.1:5501/api/books/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title: newTitle, author: newAuthor, date: newDate, preview: newPreview })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Создать новые элементы для отображения обновленной информации о книге
+                const titleElement = document.createElement('h2');
+                titleElement.textContent = data.title;
 
-            const authorElement = document.createElement('p');
-            authorElement.textContent = `Автор: ${data.author}`;
+                const authorElement = document.createElement('p');
+                authorElement.textContent = `Автор: ${data.author}`;
 
-            const dateElement = document.createElement('p');
-            dateElement.textContent = `Дата: ${data.date}`;
+                const dateElement = document.createElement('p');
+                dateElement.textContent = `Дата: ${data.date}`;
 
-            const previewElement = document.createElement('p');
-            previewElement.textContent = data.preview;
+                const previewElement = document.createElement('p');
+                previewElement.textContent = data.preview;
 
-            //const textElement = document.createElement('p');
-            //textElement.textContent = data.text;
+                const editBtn = document.createElement('button');
+                editBtn.textContent = 'Редактировать';
+                editBtn.onclick = () => editBook(data._id);
 
-            const editBtn = document.createElement('button');
-            editBtn.textContent = 'Редактировать';
-            editBtn.onclick = () => editBook(data._id);
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Удалить';
+                deleteBtn.onclick = () => deleteBook(data._id);
 
-            const deleteBtn = document.createElement('button');
-            deleteBtn.textContent = 'Удалить';
-            deleteBtn.onclick = () => deleteBook(data._id);
-
-            // Очистить контент элемента книги и добавить новые элементы
-            bookItem.innerHTML = '';
-            bookItem.appendChild(titleElement);
-            bookItem.appendChild(authorElement);
-            bookItem.appendChild(dateElement);
-            bookItem.appendChild(previewElement);
-            bookItem.appendChild(textElement);
-            bookItem.appendChild(editBtn);
-            bookItem.appendChild(deleteBtn);
-        })
-        .catch(error => console.error('Ошибка:', error)); // Обработка ошибок при редактировании книги
-    });
+                // Очистить контент элемента книги и добавить новые элементы
+                bookItem.innerHTML = '';
+                bookItem.appendChild(titleElement);
+                bookItem.appendChild(authorElement);
+                bookItem.appendChild(dateElement);
+                bookItem.appendChild(previewElement);
+                bookItem.appendChild(editBtn);
+                bookItem.appendChild(deleteBtn);
+            })
+            .catch(error => console.error('Ошибка:', error));
+        });
+    } catch (error) {
+        console.error('Ошибка:', error);
+    }
 }
+
+
 
 // Функция удаления книги
 function deleteBook(id) {
