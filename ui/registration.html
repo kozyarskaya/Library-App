@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="form_style.css">
+    <title>Регистрация</title>
+</head>
+<body>
+    <div class="image-container">
+        <img src="img/books2.jpg" alt="Описание изображения 1" class="image">
+        <!--<img src="img/books2c.jpg" alt="Описание изображения 1" class="image">
+        <img src="img/books2r.jpg" alt="Описание изображения 1" class="image">-->
+    </div>
+
+    <div id="registration_form" class="invisible">
+        <h1>Регистрация</h1>
+        <form class="form" action="" method="post">
+            <input class="input" type="text" id="nik" placeholder="Ваш Ник (никнейм — псевдоним)">
+            <input class="input" type="email" id="email" placeholder="Ваш e-mail">
+            <input class="input" type="password" id="password1" placeholder="Пароль">
+            <input class="input" type="password" id="password2" placeholder="Пароль еще раз">
+            <button class="btn" id="reg-btn" onclick="signUp()" type="submit">Регистрация</button>
+            <button class="link-btn" onclick="authorization()" type="button">Уже есть аккаунт</button>
+        </form>
+    </div>
+
+    <div id="authorization_form"  >
+        <h1>Авторизация</h1>
+        <form class="form" action="" method="post">
+            <input class="input" type="email" id="email-a" placeholder="Ваш e-mail">
+            <input class="input" type="password" id="password-a" placeholder="Пароль">
+            <button class="btn" id:="auth-btn" onclick="login()" type="submit">Войти</button>
+            <button class="link-btn" onclick="registrate()" type="button">Нет аккаунта</button>
+        </form>
+    </div>
+    
+
+    <div  class ="invisible" class="book-containerG"  id="book-containerG">
+        <h1 class="beautiful">Ваша Библиотека = мечты OFF</h1>
+        <div class="book-container" id="book-container">
+            <!-- Книги будут добавлены здесь -->
+    </div>
+    <h2 class="beautiful">Добавьте свое творение</h2>
+        <button id="add-book-btn" class="add-book-btn" title="Добавить книгу"><i class="fas fa-plus plus-icon"></i></button>
+        <form form class="form" action="" method="post" id="add-book-form-content">
+            <div id="add-book-form" >
+                <input class="input" type="text" id="title" placeholder="Название">
+                <input class="input" type="text" id="author" placeholder="Автор">
+                <input  class="input" type="date" id="date" placeholder="Дата">
+                <input  class="input" type="text" id="preview" placeholder="Краткое описание">
+                <button class="btn" type="submit">Добавить</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"></script>
+    <script src="js/reg.js"></script>
+</body>
+</html>
