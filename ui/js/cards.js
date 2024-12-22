@@ -1,150 +1,11 @@
-// Функция для капитализации первой буквы строки
-function capi(string) {
-    if (!string) return ""; // Обработка пустой строки
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-}
-
-// V A L U E S
-const inputUserName = document.getElementById("nik"); // Получение элемента ника
-const inputEmail = document.getElementById("email"); // Получение элемента электронной почты
-const inputPass1 = document.getElementById("password1"); // Получение элемента пароля
-const inputPass2 = document.getElementById("password2"); // Получение элемента повторного пароля
-const registrationForm = document.getElementById("registration_form"); // Получение формы регистрации
-const authorizationForm = document.getElementById("authorization_form"); // Получение формы авторизации
-const bookContainerG = document.getElementById("book-containerG"); // Получение контейнера для книг
-const inputEmailA = document.getElementById("email-a");
-const inputPassA = document.getElementById("password-a");
-const authBtn = document.getElementById("auth-btn")
-
-
-    // Обработка события отправки формы регистрации
-    registrationForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Предотвратить стандартное поведение отправки формы
-        // Проверка заполнения всех полей
-        if (inputUserName.value.trim() === "" || inputEmail.value.trim() === "" ||
-            inputPass1.value.trim() === "" || inputPass2.value.trim() === "") {
-            alert(`Пожалуйста заполните все данные!`);
-        } else if (inputPass1.value.trim() != inputPass2.value.trim()) {
-            alert(`Пароли не совпадают!`);
-        } else if (!inputEmail.value.trim().includes('@')) {
-            alert('Адрес электронной почты должен содержать @');
-        } else {
-            signUp(); // Вызов функции отправки данных на сервер
-        }
-    });
-    
-    // Обработка события отправки формы авторизации
-    authorizationForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Предотвратить стандартное поведение отправки формы
-        // Проверка заполнения всех полей
-
-        if (inputEmailA.value.trim() === "" || inputPassA.value.trim() === "") {
-            alert(`Пожалуйста заполните все данные!`);
-        } else {
-            login(); // Вызов функции отправки данных на сервер
-        }
-    });
-
-    // Функция переключения на форму авторизации
-    function authorization() {
-        registrationForm.classList.add("invisible"); // Скрытие формы регистрации
-        authorizationForm.classList.remove("invisible"); // Отображение формы авторизации
-    }
-
-    // Функция переключения на форму регистрации
-    function registrate() {
-        registrationForm.classList.remove("invisible"); // Отображение формы регистрации
-        authorizationForm.classList.add("invisible"); // Скрытие формы авторизации
-    }
-
-    // Функция отправки данных на сервер
-    function signUp() {
-        const input_data = { 
-            username: inputUserName.value.trim(), // Получение значения ника
-            email: inputEmail.value.trim(), // Получение значения электронной почты
-            password: inputPass1.value.trim() // Получение значения пароля
-        };
-
-        // Отправка POST запроса на сервер
-    
-        fetch('http://127.0.0.1:5501/api/registration', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }, // Установка заголовка Content-Type
-            body: JSON.stringify(input_data) // Преобразование данных в JSON строку
-        })
-        .then(response => {
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`); // Обработка ошибок HTTP
-            }
-            return response.json(); // Парсинг ответа в JSON
-        })
-        .then(data => {
-            console.log(data); // Вывод полученных данных в консоль
-            if (data.ok) { // Проверка статуса ответа
-                
-                registrationForm.classList.add("invisible"); // Скрытие формы регистрации
-                bookContainerG.classList.remove("invisible"); // Отображение контейнера для книг
-
-                alert(`Аккаунт создан)\n Ваш ник и почта: ${inputUserName.value} ${inputEmail.value}`); // Вывод сообщения об успешной регистрации
-            }else{
-                alert(data.Massage)
-            }
-        })
-        .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
-    }
-
-    // Функция отправки данных на сервер для авторизации
-    function login() {
-        const input_data = { 
-            email: document.getElementById("email-a").value.trim(), // Получение значения электронной почты
-            password: document.getElementById("password-a").value.trim() // Получение значения пароля
-        };
-
-        // Отправка POST запроса на сервер
-        fetch('http://127.0.0.1:5501/api/login', {
-            method: 'POST',
-            headers: { 
-                'Authorization': `Bearer ${token}`, // добавление токина в заголовок
-                'Content-Type': 'application/json' }, // Установка заголовка Content-Type
-            body: JSON.stringify(input_data) // Преобразование данных в JSON строку
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`); // Обработка ошибок HTTP
-            }
-            return response.json(); // Парсинг ответа в JSON
-        })
-        .then(data => {
-            console.log(data); // Вывод полученных данных в консоль
-            if (data.ok) { // Проверка статуса ответа
-                authorizationForm.classList.add("invisible"); // Скрытие формы авторизации
-                bookContainerG.classList.remove("invisible"); // Отображение контейнера для книг
-
-                alert(`С возвращением!\n  ${inputEmailA.value}`); // Вывод сообщения об успешной авторизации
-            }else{
-                alert(data.Massage)
-            }
-        })
-        .catch(error => console.error('Ошибка:', error)); // Обработка ошибок
-    }
-
-
-
-// C A R D S
-
-
-
-    // Выбор элементов по их ID
+// Выбор элементов по их ID
 const bookContainer = document.getElementById('book-container');
 const addBookBtn = document.getElementById('add-book-btn');
 const addBookForm = document.getElementById('add-book-form');
 const addBookFormContent = document.getElementById('add-book-form-content');
 
 // Загрузка книг с сервера используя fetch API
-if (bookContainer) { 
 fetch('test.json')
-//fetch('/api/articles')
     .then(response => response.json())
     .then(data => {
         // Перебор массива книг и создание элементов для каждой книги
@@ -174,26 +35,14 @@ fetch('test.json')
 
             // Создание кнопок для редактирования и удаления книги
             const editBtn = document.createElement('button');
-            //editBtn.textContent = 'Редактировать';
-            editBtn.title ="Редактировать"
+            editBtn.textContent = 'Редактировать';
             editBtn.onclick = () => editBook(book._id); // Вызов функции редактирования книги
-            //editBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
-            editBtn.classList.add("edit-btn");
-            const editIcon = document.createElement('i');
-            editIcon.classList.add('fas', 'fa-pencil-alt', 'edit-icon');
-            editBtn.appendChild(editIcon);
-    
-
+            editBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
 
             const deleteBtn = document.createElement('button');
-            //deleteBtn.textContent = 'Удалить';
-            deleteBtn.title="Удалить"
+            deleteBtn.textContent = 'Удалить';
             deleteBtn.onclick = () => deleteBook(book._id); // Вызов функции удаления книги
-            //deleteBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
-            deleteBtn.classList.add("delete-btn");
-            const deleteIcon = document.createElement('i');
-            deleteIcon.classList.add('fas', 'fa-trash-alt', 'delete-icon');
-            deleteBtn.appendChild(deleteIcon);
+            deleteBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
 
             // Добавление элементов в контейнер книги
             bookItem.appendChild(title);
@@ -203,7 +52,6 @@ fetch('test.json')
             //bookItem.appendChild(text);
             bookItem.appendChild(editBtn);
             bookItem.appendChild(deleteBtn);
-            
 
             // Добавление контейнера книги в общий контейнер книг
             bookContainer.appendChild(bookItem);
@@ -213,9 +61,7 @@ fetch('test.json')
 
     // Обработка клика по кнопке добавления новой книги
 addBookBtn.onclick = () => {
-    //addBookForm.classList.remove('invisible'); // Показать форму добавления книги
-        const htmlHeight = document.documentElement.scrollHeight;
-        window.scrollTo({ top: htmlHeight, behavior: 'smooth' });
+    addBookForm.classList.remove('invisible'); // Показать форму добавления книги
 };
 
 // Обработка отправки формы добавления новой книги
@@ -230,9 +76,10 @@ addBookFormContent.addEventListener('submit', (e) => {
     //const text = document.getElementById('text').value; // Комментировано, но можно раскомментировать если нужно
 
     // Отправка POST запроса на сервер для добавления новой книги
-    fetch('http://127.0.0.1:5501/api/articles/', {
+    fetch('http://127.0.0.1:5500/api/books/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json' },
         body: JSON.stringify({ title, author, date, preview, text: '' }) // Преобразование данных в JSON строку
     })
     .then(response => response.json())
@@ -319,13 +166,11 @@ function editBook(id) {
             const newPreview = document.getElementById('preview').value;
 
             // Отправка PUT запроса на сервер для обновления книги
-            fetch(`http://127.0.0.1:5501/api/articles/${id}`, {
+            fetch(`http://127.0.0.1:5500/api/books/${id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title: newTitle,
-                                        author: newAuthor,
-                                        date: newDate, 
-                                        preview: newPreview })
+                headers: { 'Authorization': `Bearer ${token}`, 
+                'Content-Type': 'application/json' },
+                body: JSON.stringify({ title: newTitle, author: newAuthor, date: newDate, preview: newPreview })
             })
             .then(response => response.json())
             .then(data => {
@@ -366,11 +211,14 @@ function editBook(id) {
     }
 }
 
+
+
 // Функция удаления книги
 function deleteBook(id) {
     // Отправка DELETE запроса на сервер для удаления книги
-    fetch(`http://localhost:3000/api/articles/${id}`, {
-        method: 'DELETE'
+    fetch(`http://127.0.0.1:5500/api/books/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}`},
     })
     .then(() => {
         // Найти элемент книги по ID и удалить его из DOM
@@ -379,9 +227,3 @@ function deleteBook(id) {
     })
     .catch(error => console.error('Ошибка:', error)); // Обработка ошибок при удалении книги
 }
-} else {
-    console.log('Элемент с ID "book-container" не найден'); 
-}
-
-
-
