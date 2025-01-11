@@ -6,12 +6,12 @@ import (
 	"fmt"
 )
 
-func (u *Usecase) CreateArticle(v api.Article) error {
-	err := u.p.InsertArticle(v)
+func (u *Usecase) CreateArticle(v api.Article) (int, error) {
+	id, err := u.p.InsertArticle(v)
 	if err != nil {
-		return err // Возвращаем пустую статью и ошибку
+		return 0, err // Возвращаем пустую статью и ошибку
 	}
-	return nil // Возвращаем созданную статью и nil для ошибки
+	return id, nil // Возвращаем созданную статью и nil для ошибки
 }
 
 func (u *Usecase) FetchAllId() ([]int, error) {

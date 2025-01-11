@@ -54,6 +54,7 @@ function authorization() {
 function registrate() {
     registrationForm.classList.remove("invisible"); // Отображение формы регистрации
     authorizationForm.classList.add("invisible"); // Скрытие формы авторизации
+    
 }
 
 // Функция отправки данных на сервер для регистрации
@@ -117,9 +118,10 @@ function login() {
             authorizationForm.classList.add("invisible"); 
             bookContainerG.classList.remove("invisible"); 
 
-            alert(`С возвращением!\n${inputEmailA.value}`);
+            alert(`С возвращением1!\n${inputEmailA.value}`);
         } else {
-            alert(data.message); // Исправлено с "Massage" на "message"
+            alert(data.message);
+            console.log(data.message); // Исправлено с "Massage" на "message"
         }
     })
     .catch(error => console.error('Ошибка:', error));
@@ -150,9 +152,10 @@ fetch('http://127.0.0.1:5501/articles', {
         console.log(data.message)
         data.message.forEach(book => {
             console.log(book)
+            
             const bookItem = document.createElement('div');
             bookItem.classList.add('book-item');
-            bookItem.dataset.id = book._id; // Добавление атрибута data-id для идентификации книги
+            bookItem.dataset.id = book.id; // Добавление атрибута data-id для идентификации книги
 
             
             // Создание элементов для отображения информации о книге
@@ -177,7 +180,7 @@ fetch('http://127.0.0.1:5501/articles', {
             const editBtn = document.createElement('button');
             //editBtn.textContent = 'Редактировать';
             editBtn.title ="Редактировать"
-            editBtn.onclick = () => editBook(book._id); // Вызов функции редактирования книги
+            editBtn.onclick = () => editBook(book.id); // Вызов функции редактирования книги
             //editBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
             editBtn.classList.add("edit-btn");
             const editIcon = document.createElement('i');
@@ -189,7 +192,7 @@ fetch('http://127.0.0.1:5501/articles', {
             const deleteBtn = document.createElement('button');
             //deleteBtn.textContent = 'Удалить';
             deleteBtn.title="Удалить"
-            deleteBtn.onclick = () => deleteBook(book._id); // Вызов функции удаления книги
+            deleteBtn.onclick = () => deleteBook(book.id); // Вызов функции удаления книги
             //deleteBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
             deleteBtn.classList.add("delete-btn");
             const deleteIcon = document.createElement('i');
@@ -239,10 +242,12 @@ addBookBtn.onclick = () => {
     })
     .then(response => response.json())
     .then(data => {
+        
         // Создание нового элемента книги после успешного добавления на сервер
         const bookItem = document.createElement('div');
         bookItem.classList.add('book-item');
-        //bookItem.dataset.id = data._id; // Добавление атрибута data-id
+       // bookItem.dataset.id = data.id; // Добавление атрибута data-id
+        //const bookId = bookItem.dataset.id;
 
         const titleElement = document.createElement('h2');
         titleElement.textContent = title;
@@ -261,11 +266,11 @@ addBookBtn.onclick = () => {
 
         const editBtn = document.createElement('button');
         editBtn.textContent = 'Редактировать';
-        editBtn.onclick = () => editBook(data._id);
+        editBtn.onclick = () => editBook(data.id);
 
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Удалить';
-        deleteBtn.onclick = () => deleteBook(data._id);
+        deleteBtn.onclick = () => deleteBook(data.id);
 
         bookItem.appendChild(titleElement);
         bookItem.appendChild(authorElement);
@@ -314,6 +319,7 @@ function editBook(id) {
         editForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
+
             // Получить новые значения полей формы
             const newTitle = document.getElementById('title').value;
             const newAuthor = document.getElementById('author').value;
@@ -335,7 +341,7 @@ function editBook(id) {
                 // Создать новые элементы для отображения обновленной информации о книге
                 const bookItem = document.createElement('div');
         bookItem.classList.add('book-item');
-        bookItem.dataset.id = data._id; // Добавление атрибута data-id
+        bookItem.dataset.id = data.id; // Добавление атрибута data-id
 
         const titleElement = document.createElement('h2');
         titleElement.textContent = title;
@@ -354,11 +360,11 @@ function editBook(id) {
 
         const editBtn = document.createElement('button');
         editBtn.textContent = 'Редактировать';
-        editBtn.onclick = () => editBook(data._id);
+        editBtn.onclick = () => editBook(data.id);
 
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Удалить';
-        deleteBtn.onclick = () => deleteBook(data._id);
+        deleteBtn.onclick = () => deleteBook(data.id);
 
         bookItem.appendChild(titleElement);
         bookItem.appendChild(authorElement);

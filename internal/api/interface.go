@@ -5,7 +5,7 @@ type Usecase interface {
 	FetchFullArticleByID(int) (Article, error)
 	ChangeArticleByID(Article) error
 	DeleteArticleByID(int) error
-	CreateArticle(Article) error
+	CreateArticle(Article) (int, error)
 	FetchAllId() ([]int, error)
 	SignUp(User) (string, error)
 	SignIn(Credentials) (string, error) //Возвращает JWT токен,

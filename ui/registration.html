@@ -44,11 +44,11 @@
         <h1>Авторизация</h1>
         <form class="form" action="" method="post">
             <div class="input-group">
-                <input class="input" required type="email" id="email" >
-                <label class = "label" for ="email">Ваш e-mail</label>
+                <input class="input" required type="email" id="email-a" >
+                <label class = "label" for ="email-a">Ваш e-mail</label>
             </div>
             <div class="input-group">
-                <input class="input" required type="password" id="password1" >
+                <input class="input" required type="password" id="password-a" >
                 <label class = "label" for ="password1">Пароль</label>
             </div>
             <button class="btn" id:="auth-btn" onclick="login()" type="submit">Войти</button>
@@ -66,10 +66,24 @@
         <button id="add-book-btn" class="add-book-btn" title="Добавить книгу"><i class="fas fa-plus plus-icon"></i></button>
         <form form class="form" action="" method="post" id="add-book-form-content">
             <div id="add-book-form" >
-                <input class="input" type="text" id="title" placeholder="Название">
-                <input class="input" type="text" id="author" placeholder="Автор">
-                <input  class="input" type="date" id="date" placeholder="Дата">
-                <input  class="input" type="text" id="preview" placeholder="Краткое описание">
+                <div class="input-group">
+                    <input class="input" required type="text" id="title" >
+                    <label class = "label" for ="title">Название</label>
+                </div>
+                <div class="input-group">
+                    <input class="input" required type="text" id="author" >
+                    <label class = "label" for ="author">Автор</label>
+                </div>
+                <div class="input-group">
+                    <input class="input" required type="date" id="date" >
+                    <label class = "label" for ="date">Дата</label>
+                </div>
+                <div class="input-group">
+                    <!-- <input class="input" required type="text" id="preview" >-->
+                    <textarea class="input"  id="preview" name="message" rows="10"></textarea>
+                    <label class = "label" for ="preview">Краткое описание</label>
+                </div>
+                
                 <button class="btn" type="submit">Добавить</button>
             </div>
         </form>

@@ -64,20 +64,21 @@ func (p *Provider) SelectIds() ([]int, error) {
 }
 
 // ИСПРАВИТЬ!
-func (p *Provider) InsertArticle(a api.Article) error {
+func (p *Provider) InsertArticle(a api.Article) (int, error) {
 	fmt.Println("InsertArticle")
 	_, err := p.articlesDB.Exec("INSERT INTO articles (title, text, author_id, date, deleted) VALUES ($1, $2, $3, $4, FALSE)", a.Title, a.Text, a.AuthorId, a.Date)
 
 	if err != nil {
 		fmt.Println(err.Error())
-		return err
+		return 0, err
 	}
-	return nil
+	id := a.Id
+	return id, nil
 }
 
 // ИСПРАВИТЬ!
 func (p *Provider) UpdateArticle(a api.Article) error {
-	_, err := p.articlesDB.Exec("UPDATE articles SET title = $1, text = $2, author_id = $3, data = $4 WHERE id = $5 AND deleted = FALSE", a.Title, a.Text, a.AuthorId, a.Date, a.Id)
+	_, err := p.articlesDB.Exec("UPDATE articles SET title = $1, text = $2, author_id = $3, date = $4 WHERE id = $5 AND deleted = FALSE", a.Title, a.Text, a.AuthorId, a.Date, a.Id)
 	if err != nil {
 		return err
 	}

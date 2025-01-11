@@ -106,16 +106,17 @@ func (srv *Server) postArticle(e echo.Context) error {
 	fmt.Println("qqq2")
 	newArticle.AuthorId, _ = strconv.Atoi(userId)
 	// Создаем статью в бизнес-логике
-	err := srv.uc.CreateArticle(newArticle)
+	id, err := srv.uc.CreateArticle(newArticle)
 	if err != nil {
 		return e.JSON(http.StatusInternalServerError, Response{
 			Ok:      "false",
 			Message: "ошибка создания статьи",
 		})
 	}
-	return e.JSON(http.StatusCreated, Response{
+	return e.JSON(http.StatusCreated, ResponseId{
 		Ok:      "true",
 		Message: "Статья создана!",
+		ArtId:   id,
 	})
 }
 
@@ -216,17 +217,24 @@ func (srv *Server) putArticle(e echo.Context) error {
 
 func (srv *Server) deleteArticle(e echo.Context) error {
 	// Извлекаем ID статьи из параметров запроса
+
+	fmt.Println("deleteArticle from handler")
+
 	idStr := e.Param("id")
 	// Преобразуем строку в целое число
 	id, err := strconv.Atoi(idStr)
+	fmt.Println("deleteArticle from handler, id", id)
 	if err != nil {
+		fmt.Println("deleteArticle from handler, id fail")
 		return e.JSON(http.StatusBadRequest, echo.Map{"error": "Invalid article ID"})
 	}
 	// Удаляем статью в бизнес-логике
 	err = srv.uc.DeleteArticleByID(id)
 	if err != nil {
+		fmt.Println("deleteArticle from handler, DeleteArticleByID fail")
 		return e.JSON(http.StatusNotFound, echo.Map{"error": "Article not found"})
 	}
 	// Возвращаем статус 204 No Content при успешном удалении
+	fmt.Println("DELETEED!!!")
 	return e.NoContent(http.StatusNoContent)
 }

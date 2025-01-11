@@ -45,6 +45,12 @@ type ResponseN struct {
 	Message interface{} `json:"message"`
 }
 
+type ResponseId struct {
+	Ok      string `json:"ok"`
+	Message string `json:"message"`
+	ArtId   int    `json:"id"`
+}
+
 type ArticleRes struct {
 	Id     int    `json:"id"`
 	Title  string `json:"title"`   //
