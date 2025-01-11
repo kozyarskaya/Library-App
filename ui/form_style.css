@@ -71,7 +71,8 @@ h1 {
     border-bottom-left-radius: var(--border_radius);
 }
 
-.input {
+
+/*.input {
     display: block;
     width: 100%;
     padding: 8px 10px;
@@ -81,7 +82,47 @@ h1 {
     font-size: 16px;
     border-top-right-radius: var(--border_radius);
     border-bottom-left-radius: var(--border_radius);
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}*/
+.input-group{
+    font-size: 1.25rem;
+    position: relative;
+    --primary: var(--color2);
+    margin: 15px;
 }
+
+.input {
+    all: unset;
+    color: var(--text_color);
+    padding: 1rem;
+    border: 1px solid var(--color1);
+    border-radius: 10px;
+    transition: 150ms 
+    cubic-bezier(0.4, 0, 0.2, 1);
+    
+}
+.label{
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: #373636;
+    pointer-events: none;
+    transition: 150ms
+    cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input:focus{
+    border: 1px solid
+        var(--primary);
+}
+
+input:is(:focus, :valid) ~ label{
+    transform: 
+    translateY(-120%)
+    scale(0.7);
+    background-color:var(--bg_color) ;
+    padding-inline: 0.3rem;
+    color: var(--primary)}
 
 .btn {
     display: block;

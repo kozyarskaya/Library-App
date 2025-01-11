@@ -16,13 +16,25 @@
         <img src="img/books2r.jpg" alt="Описание изображения 1" class="image">-->
     </div>
 
-    <div id="registration_form" class="invisible">
+    <div  id="registration_form" class="invisible">
         <h1>Регистрация</h1>
         <form class="form" action="" method="post">
-            <input class="input" type="text" id="nik" placeholder="Ваш Ник (никнейм — псевдоним)">
-            <input class="input" type="email" id="email" placeholder="Ваш e-mail">
-            <input class="input" type="password" id="password1" placeholder="Пароль">
-            <input class="input" type="password" id="password2" placeholder="Пароль еще раз">
+            <div class="input-group">
+                <input class="input" required type="text" id="nik" >
+                <label class = "label" for ="nik">Ваш псевдоним</label>
+            </div>
+            <div class="input-group">
+                <input class="input" required type="email" id="email" >
+                <label class = "label" for ="email">Ваш e-mail</label>
+            </div>
+            <div class="input-group">
+                <input class="input" required type="password" id="password1" >
+                <label class = "label" for ="password1">Пароль</label>
+            </div>
+            <div class="input-group">
+                <input class="input" required type="password" id="password2" >
+                <label class = "label" for ="password2">Пароль еще раз</label>
+            </div>
             <button class="btn" id="reg-btn" onclick="signUp()" type="submit">Регистрация</button>
             <button class="link-btn" onclick="authorization()" type="button">Уже есть аккаунт</button>
         </form>
@@ -31,8 +43,14 @@
     <div id="authorization_form"  >
         <h1>Авторизация</h1>
         <form class="form" action="" method="post">
-            <input class="input" type="email" id="email-a" placeholder="Ваш e-mail">
-            <input class="input" type="password" id="password-a" placeholder="Пароль">
+            <div class="input-group">
+                <input class="input" required type="email" id="email" >
+                <label class = "label" for ="email">Ваш e-mail</label>
+            </div>
+            <div class="input-group">
+                <input class="input" required type="password" id="password1" >
+                <label class = "label" for ="password1">Пароль</label>
+            </div>
             <button class="btn" id:="auth-btn" onclick="login()" type="submit">Войти</button>
             <button class="link-btn" onclick="registrate()" type="button">Нет аккаунта</button>
         </form>

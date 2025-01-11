@@ -335,7 +335,7 @@ function editBook(id) {
                 // Создать новые элементы для отображения обновленной информации о книге
                 const bookItem = document.createElement('div');
         bookItem.classList.add('book-item');
-        //bookItem.dataset.id = data._id; // Добавление атрибута data-id
+        bookItem.dataset.id = data._id; // Добавление атрибута data-id
 
         const titleElement = document.createElement('h2');
         titleElement.textContent = title;
@@ -377,24 +377,39 @@ function editBook(id) {
         console.error('Ошибка:', error);
     }
 }
+}
 
-// Функция удаления книги
+
+
 function deleteBook(id) {
-    // Отправка DELETE запроса на сервер для удаления книги
+    const bookContainer = document.getElementById('book-container');
+    if (!bookContainer) {
+        console.log('Элемент с ID "book-container" не найден');
+        return;
+    }
+
     fetch(`http://127.0.0.1:5501/articles/${id}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}`}
+        headers: { 
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
     })
-    .then(() => {
-        // Найти элемент книги по ID и удалить его из DOM
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
+        }
         const bookItem = bookContainer.querySelector(`.book-item[data-id="${id}"]`);
-        if (bookItem) bookItem.remove();
+        if (bookItem) {
+            bookItem.remove();
+        } else {
+            console.log(`Элемент книги с ID "${id}" не найден в DOM`);
+        }
     })
-    .catch(error => console.error('Ошибка:', error)); // Обработка ошибок при удалении книги
+    .catch(error => console.error('Ошибка:', error));
 }
-} else {
-    console.log('Элемент с ID "book-container" не найден'); 
-}
+
+
+
 
 
 
