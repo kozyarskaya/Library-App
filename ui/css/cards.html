@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <title>Ваша Библиотека = мечты OFF </title>
+    <link rel="stylesheet" href="css/cards_style.css">
+</head>
+<body>
+    <h1 class="beautiful">Ваша Библиотека = мечты OFF</h1>
+    <div class="book-container" id="book-container">
+        <!-- Книги будут добавлены здесь -->
+    </div>
+    <button id="add-book-btn" class="btn">Добавить книгу</button>
+    <form form class="form" action="" method="post" id="add-book-form-content">
+    <div id="add-book-form" class="invisible">
+    
+            <input class="input" type="text" id="title" placeholder="Название">
+            <input class="input" type="text" id="author" placeholder="Автор">
+            <input  class="input" type="date" id="date" placeholder="Дата">
+            <input  class="input" type="text" id="preview" placeholder="Краткое описание">
+            <button class="btn" type="submit">Добавить</button>
+    </div>
+</form>
+    <script src="js/cards.js"></script>
+</body>
+</html>
