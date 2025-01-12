@@ -118,7 +118,7 @@ function login() {
             authorizationForm.classList.add("invisible"); 
             bookContainerG.classList.remove("invisible"); 
 
-            alert(`С возвращением1!\n${inputEmailA.value}`);
+            alert(`С возвращением!\n${inputEmailA.value}`);
         } else {
             alert(data.message);
             console.log(data.message); // Исправлено с "Massage" на "message"
@@ -173,8 +173,8 @@ fetch('http://127.0.0.1:5501/articles', {
             const preview = document.createElement('p');
             preview.textContent = book.preview;
 
-            const text = document.createElement('p');
-            text.textContent = book.text;
+            //const text = document.createElement('p');
+            //text.textContent = book.text;
 
             // Создание кнопок для редактирования и удаления книги
             const editBtn = document.createElement('button');
@@ -242,7 +242,7 @@ addBookBtn.onclick = () => {
     })
     .then(response => response.json())
     .then(data => {
-        
+        console.log("Добавление", data)
         // Создание нового элемента книги после успешного добавления на сервер
         const bookItem = document.createElement('div');
         bookItem.classList.add('book-item');
@@ -265,12 +265,26 @@ addBookBtn.onclick = () => {
         //textElement.textContent = data.text;
 
         const editBtn = document.createElement('button');
-        editBtn.textContent = 'Редактировать';
-        editBtn.onclick = () => editBook(data.id);
+            //editBtn.textContent = 'Редактировать';
+            editBtn.title ="Редактировать"
+            editBtn.onclick = () => editBook(data.id); // Вызов функции редактирования книги
+            //editBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
+            editBtn.classList.add("edit-btn");
+            const editIcon = document.createElement('i');
+            editIcon.classList.add('fas', 'fa-pencil-alt', 'edit-icon');
+            editBtn.appendChild(editIcon);
+    
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Удалить';
-        deleteBtn.onclick = () => deleteBook(data.id);
+
+            const deleteBtn = document.createElement('button');
+            //deleteBtn.textContent = 'Удалить';
+            deleteBtn.title="Удалить"
+            deleteBtn.onclick = () => deleteBook(data.id); // Вызов функции удаления книги
+            //deleteBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
+            deleteBtn.classList.add("delete-btn");
+            const deleteIcon = document.createElement('i');
+            deleteIcon.classList.add('fas', 'fa-trash-alt', 'delete-icon');
+            deleteBtn.appendChild(deleteIcon);
 
         bookItem.appendChild(titleElement);
         bookItem.appendChild(authorElement);
@@ -304,10 +318,10 @@ function editBook(id) {
         // Создание формы для редактирования книги
         const editForm = document.createElement('form');
         editForm.innerHTML = `
-            <input class="input" type="text" id="title" value="${title}">
-            <input class="input" type="text" id="author" value="${author}">
-            <input class="input" type="date" id="date" value="${date}">
-            <input class="input" type="text" id="preview" value="${preview}">
+            <input class="input1" type="text" id="title" value="${title}">
+            <input class="input1" type="text" id="author" value="${author}">
+            <input class="input1" type="date" id="date" value="${date}">
+            <input class="input1" type="text" id="preview" value="${preview}">
             <button class="btn" type="submit">Сохранить</button>
         `;
 
@@ -339,9 +353,10 @@ function editBook(id) {
             .then(response => response.json())
             .then(data => {
                 // Создать новые элементы для отображения обновленной информации о книге
+                console.log("Редактирование", data)
                 const bookItem = document.createElement('div');
         bookItem.classList.add('book-item');
-        bookItem.dataset.id = data.id; // Добавление атрибута data-id
+        //bookItem.dataset.id = data.id; // Добавление атрибута data-id
 
         const titleElement = document.createElement('h2');
         titleElement.textContent = title;
@@ -359,12 +374,26 @@ function editBook(id) {
         //textElement.textContent = data.text;
 
         const editBtn = document.createElement('button');
-        editBtn.textContent = 'Редактировать';
-        editBtn.onclick = () => editBook(data.id);
+            //editBtn.textContent = 'Редактировать';
+            editBtn.title ="Редактировать"
+            editBtn.onclick = () => editBook(id); // Вызов функции редактирования книги
+            //editBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
+            editBtn.classList.add("edit-btn");
+            const editIcon = document.createElement('i');
+            editIcon.classList.add('fas', 'fa-pencil-alt', 'edit-icon');
+            editBtn.appendChild(editIcon);
+    
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Удалить';
-        deleteBtn.onclick = () => deleteBook(data.id);
+
+            const deleteBtn = document.createElement('button');
+            //deleteBtn.textContent = 'Удалить';
+            deleteBtn.title="Удалить"
+            deleteBtn.onclick = () => deleteBook(id); // Вызов функции удаления книги
+            //deleteBtn.classList.add("btnleft"); // Добавление класса для стилизации кнопки
+            deleteBtn.classList.add("delete-btn");
+            const deleteIcon = document.createElement('i');
+            deleteIcon.classList.add('fas', 'fa-trash-alt', 'delete-icon');
+            deleteBtn.appendChild(deleteIcon);
 
         bookItem.appendChild(titleElement);
         bookItem.appendChild(authorElement);

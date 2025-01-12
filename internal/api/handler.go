@@ -70,7 +70,7 @@ func (srv *Server) signIn(c echo.Context) error {
 			Message: maybe_token_msg,
 		})
 	}
-
+	fmt.Println("signIn suc", maybe_token_msg)
 	return c.JSON(http.StatusOK, Response{
 		Ok:      "true",
 		Message: maybe_token_msg,
@@ -174,32 +174,19 @@ func (srv *Server) getONEArticleById(e echo.Context) error {
 //проверка доступа!!!!
 
 func (srv *Server) putArticle(e echo.Context) error {
-	userIdStr := e.Get("userId").(string)
-	userId, err := strconv.Atoi(userIdStr)
-	if err != nil {
-		return e.JSON(http.StatusInternalServerError, echo.Map{"error": "Invalid user ID"})
-	}
-
+	fmt.Println("in putArticle")
 	idStr := e.Param("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		return e.JSON(http.StatusBadRequest, echo.Map{"error": "Invalid article ID"})
 	}
+	fmt.Println("in putArticle, id ok")
 	var updatedArticle Article
 	//связывания данных из HTTP-запроса с переменной
 	if err := e.Bind(&updatedArticle); err != nil {
 		return e.JSON(http.StatusBadRequest, echo.Map{"error": "Invalid input"})
 	}
-	existingArticle, err := srv.uc.FetchFullArticleByID(id)
-	if err != nil {
-		return e.JSON(http.StatusNotFound, echo.Map{"error": "Article not found"})
-	}
-
-	// Проверяем, является ли текущий пользователь автором статьи
-	if existingArticle.AuthorId != userId {
-		return e.JSON(http.StatusForbidden, echo.Map{"error": "not authorized to edit this article"})
-	}
-
+	fmt.Println("in putArticle, связывания данных ok")
 	// Устанавливаем ID обновляемой статьи
 	updatedArticle.Id = id
 
@@ -208,6 +195,7 @@ func (srv *Server) putArticle(e echo.Context) error {
 	if err != nil {
 		return e.JSON(http.StatusInternalServerError, echo.Map{"error": "Failed to update article"})
 	}
+	fmt.Println("in putArticle,  UPDATED и ok")
 
 	// Возвращаем статус 204 No Content при успешном обновлении
 	return e.NoContent(http.StatusOK)

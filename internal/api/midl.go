@@ -15,6 +15,7 @@ func JWTMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		token := c.Request().Header.Get("Authorization")
 		if token == "" {
+			fmt.Println("missing token")
 			return c.JSON(http.StatusUnauthorized, map[string]string{"error": "missing token"})
 		}
 
@@ -27,14 +28,17 @@ func JWTMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		if err != nil || !tkn.Valid {
 			return c.JSON(http.StatusUnauthorized, map[string]string{"error": "invalid token"})
 		}
+		fmt.Println(claims.AuthorId)
 
 		c.Set("authorId", fmt.Sprintf("%d", claims.AuthorId)) // Если AuthorId - это int
+		fmt.Println("JWTMiddleware succ")
 		return next(c)
 	}
 }
 func TokenValidationHandler(c echo.Context) error {
 	token := c.QueryParam("token")
 	if token == "" {
+		fmt.Println("missing toke in TokenValidationHandler")
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "missing token"})
 	}
 

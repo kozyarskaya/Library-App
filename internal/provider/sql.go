@@ -66,13 +66,16 @@ func (p *Provider) SelectIds() ([]int, error) {
 // ИСПРАВИТЬ!
 func (p *Provider) InsertArticle(a api.Article) (int, error) {
 	fmt.Println("InsertArticle")
-	_, err := p.articlesDB.Exec("INSERT INTO articles (title, text, author_id, date, deleted) VALUES ($1, $2, $3, $4, FALSE)", a.Title, a.Text, a.AuthorId, a.Date)
+	// Используем RETURNING для получения ID вставленной статьи
+	row := p.articlesDB.QueryRow("INSERT INTO articles (title, text, author_id, date, deleted) VALUES ($1, $2, $3, $4, FALSE) RETURNING id", a.Title, a.Text, a.AuthorId, a.Date)
 
+	var id int
+	err := row.Scan(&id) // Сканируем полученный ID в переменную id
 	if err != nil {
 		fmt.Println(err.Error())
 		return 0, err
 	}
-	id := a.Id
+
 	return id, nil
 }
 
