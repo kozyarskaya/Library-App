@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="form_style.css">
+    <title>Регистрация</title>
+</head>
+<body>
+    <div class="image-container">
+        <img src="img/books2.jpg" alt="Описание изображения 1" class="image">
+        <!--<img src="img/books2c.jpg" alt="Описание изображения 1" class="image">
+        <img src="img/books2r.jpg" alt="Описание изображения 1" class="image">-->
+    </div>
+
+    <div  id="registration_form" class="invisible">
+        <h1>Регистрация</h1>
+        <form class="form" action="" method="post">
+            <div class="input-group">
+                <input class="input" required type="text" id="nik" >
+                <label class = "label" for ="nik">Ваш псевдоним</label>
+            </div>
+            <div class="input-group">
+                <input class="input" required type="email" id="email" >
+                <label class = "label" for ="email">Ваш e-mail</label>
+            </div>
+            <div class="input-group">
+                <input class="input" required type="password" id="password1" >
+                <label class = "label" for ="password1">Пароль</label>
+            </div>
+            <div class="input-group">
+                <input class="input" required type="password" id="password2" >
+                <label class = "label" for ="password2">Пароль еще раз</label>
+            </div>
+            <button class="btn" id="reg-btn" onclick="signUp()" type="submit">Регистрация</button>
+            <button class="link-btn" onclick="authorization()" type="button">Уже есть аккаунт</button>
+        </form>
+    </div>
+
+    <div id="authorization_form"  >
+        <h1>Авторизация</h1>
+        <form class="form" action="" method="post">
+            <div class="input-group">
+                <input class="input" required type="email" id="email-a" >
+                <label class = "label" for ="email-a">Ваш e-mail</label>
+            </div>
+            <div class="input-group">
+                <input class="input" required type="password" id="password-a" >
+                <label class = "label" for ="password1">Пароль</label>
+            </div>
+            <button class="btn" id:="auth-btn" onclick="login()" type="submit">Войти</button>
+            <button class="link-btn" onclick="registrate()" type="button">Нет аккаунта</button>
+        </form>
+    </div>
+    
+
+    <div  class ="invisible" class="book-containerG"  id="book-containerG">
+        <h1 class="beautiful">Ваша Библиотека = мечты OFF</h1>
+        <div class="book-container" id="book-container">
+            <!-- Книги будут добавлены здесь -->
+    </div>
+    <h2 class="beautiful">Добавьте свое творение</h2>
+        <button id="add-book-btn" class="add-book-btn" title="Добавить книгу"><i class="fas fa-plus plus-icon"></i></button>
+        <form form class="form" action="" method="post" id="add-book-form-content">
+            <div id="add-book-form" >
+                <div class="input-group">
+                    <input class="input" required type="text" id="title" >
+                    <label class = "label" for ="title">Название</label>
+                </div>
+                <div class="input-group">
+                    <input class="input" required type="text" id="author" >
+                    <label class = "label" for ="author">Автор</label>
+                </div>
+                <div class="input-group">
+                    <input class="input" required type="date" id="date" >
+                   <!-- <label class = "label" for ="date">Дата</label>-->
+                </div>
+                <div class="input-group">
+                    <input class="input" required type="text" id="preview" >
+                    <!-- <textarea class="input"  id="preview" name="message" rows="3" ></textarea>-->
+                    <label class = "label" for ="preview">Краткое описание</label>
+                </div>
+                
+                <button class="btn" type="submit">Добавить</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"></script>
+    <script src="reg.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+:root { 
+    --bg_color: #F2E9E4;
+    --text_color: #151515;
+    --color1: #264653;
+    --color2: #2A9D8F;
+    --color3: #FFC857;
+    --color4: #F78F1E;
+    --border_radius: 10px;
+    
+
+}
+
+.invisible {
+    display: none;
+}
+
+body {
+    font-family: Playfair Display, sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text_color);
+    background-color: var(--color3);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    color: var(--text_color);
+    text-align: center;
+}
+.beautiful{
+    font-family: inherit;
+    font-size: 65px;
+    color:#572207
+
+}
+
+.image-container {
+        display: inline-block;
+        /*justify-content: center; /* Выравнивание по центру */
+        /*align-items: center; /* Выравнивание по вертикали */
+    }
+
+    .image { 
+        
+        width: 100%; /* Ширина изображения */
+        height: auto; /* Высота изображения */
+        object-fit: cover; /* Масштабирование изображения */
+        transition: transform 0.3s ease-in-out; /* Анимация при наведении */
+    }
+
+    .image:hover {
+        transform: scale(1.1); /* Масштабирование при наведении */
+    }
+
+
+.form {
+    align-content: center;
+    max-width: 320px;
+    padding: 15px;
+    margin: 20px auto;
+    background-color: var(--bg_color);
+    border-top-right-radius: var(--border_radius);
+    border-bottom-left-radius: var(--border_radius);
+}
+
+.input {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+    font-size: 16px;
+    border-top-right-radius: var(--border_radius);
+    border-bottom-left-radius: var(--border_radius);
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    margin: 3px;
+    
+    border: 0;
+    border-top-right-radius: var(--border_radius);
+    border-bottom-left-radius: var(--border_radius);
+    background-color: var(--color2);
+    cursor: pointer;
+    
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--bg_color);
+
+}
+
+
+.link-btn{
+    display: block;
+    width: auto;
+    padding: 5px 5px;
+    
+    border: 0;
+    /*border-top-right-radius: var(--border_radius);
+    border-bottom-left-radius: var(--border_radius);*/
+    background-color: var(--bg_color);
+    cursor: pointer;
+    
+    font-family: inherit;
+    font-size: 12px;
+    color: var(--color2);
+    text-decoration: underline;
+
+}
+
+.btn:hover {
+    background-color: var(--color1);
+}
+
+.link-btn:hover{
+    color: var(--color3);
+}
+
+/* C A R D S */
+
+.book-container {
+    max-width: auto;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.book-item {
+    background-color: #2b2a2c;
+    background-image: url("img/open_book2.png");
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
+    min-width: 500px;
+    max-width: 750px;
+    margin: 20px;
+    padding: 20px;
+    padding-right: 40px;
+    /*border: 1px solid #ddd;*/
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 5px -5px #a35f3a;
+    
+}
+
+.book-item h2 {
+    margin-top: 0;
+    font-family: inherit;
+    width: 45%;
+    padding-left: 40px;
+    
+    
+}
+
+.book-item p {
+    margin-bottom: 10px;
+    width: 45%;
+    padding-left: 40px;
+
+}
+
+.btnleft{
+    display: block;
+    max-width: 50%;
+    padding: 8px 10px;
+    margin: 3px;
+    margin-left: 55%;
+    
+    border: 0;
+    border-top-right-radius: var(--border_radius);
+    border-bottom-left-radius: var(--border_radius);
+    background-color: var(--color2);
+    cursor: pointer;
+    
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--bg_color);
+
+} 
+.btnleft:hover {
+    background-color: var(--color1);
+}
+
+/*.add-book-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color2);
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.add-book-btn:hover {
+    background-color: #3e8e41;
+}
+
+.plus-icon {
+    font-size: 24px;
+    line-height: 50px;
+    text-align: center;
+    display: block;
+}
+
+.add-book-btn::before {
+    content: attr(title);
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.add-book-btn:hover::before {
+    visibility: visible;
+    opacity: 1;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+}*/
+
+
+/*.book-item a {
+    text-decoration: none;
+    color: #337ab7;
+}
+
+.book-item a:hover {
+    color: #23527c;
+   /* flex: 1 1 300px; /* Адаптивная ширина 
+    margin: 20px;
+}*/
+
+/*.delete-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.delete-icon {
+    font-size: 24px;
+    color: #666; /* Серый цвет иконки по умолчанию */
+   /* transition: color 0.3s ease-in-out;
+}
+
+.delete-btn:hover .delete-icon {
+    color: #ff0000; /* Красный цвет иконки при наведении */
+/*}*/
+
